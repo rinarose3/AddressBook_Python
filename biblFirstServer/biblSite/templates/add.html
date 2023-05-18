@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content%}
+
+<h2>Добавить запись</h2>
+<form action="{% url 'ablist' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <p><button type="submit">Отправить</button></p>
+</form>
+
+
+{% endblock %}

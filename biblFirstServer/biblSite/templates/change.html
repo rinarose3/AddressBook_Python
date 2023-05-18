@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% block content%}
+
+<h2>Редактировать запись</h2>
+<form id="myForm" action="javascript: changeForm()">
+    {% csrf_token %}
+
+    <input type="hidden" name="pk" value="{{pk}}">
+
+    {{form.as_p}}
+
+    <p><button type="submit">Отправить</button></p>
+</form>
+<script type="text/javascript">
+    async function changeForm(){
+        await fetch("{% url 'ablist' %}", {
+            method: "PUT",
+            body: new FormData(document.getElementById("myForm")),
+        });
+        document.location.href = "{% url 'main' %}"
+    }
+</script>
+
+{% endblock %}

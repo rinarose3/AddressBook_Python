@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Адресная книга</title>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'biblSite/adress1.png' %}" type="image/png"/>
+    <style type="text/css">
+        tr.selected {
+            background-color: azure;
+        }
+        .isDisabled{
+            cursor: not-allowed;
+            filter: grayscale(100%)
+            }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        {% for m in menu %}
+        <td><a class="{{m.dis}}" id="{{m.id}}" href="{% url m.url_name %}"><img src="{% static 'biblSite/'|add:m.title|add:'.png' %}" width="35"
+   height="35"></a></td>
+        {% endfor %}
+    </tr>
+</table>
+
+{% block content %}
+{% endblock %}
+
+<script type="text/javascript">
+function block_url() {
+    var par = this.href.search('[\?&]pk=([^&#]*)');
+    return par != -1;
+}
+
+var m_change = document.getElementById('change');
+
+m_change.onclick = block_url;
+
+var m_delete = document.getElementById('delete');
+
+m_delete.onclick = block_url;
+</script>
+</body>
+</html>
